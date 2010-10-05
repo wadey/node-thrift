@@ -4253,10 +4253,11 @@ output.writeStructEnd()
 return
 }
 
-CassandraClient = exports.Client = function(input, output) {
-  this.input  = input
-  this.output = null == output ? input : output
+CassandraClient = exports.Client = function(output, pClass) {
+  this.output = output;
+  this.pClass = pClass;
   this.seqid  = 0
+  this._reqs = {};
 }
 CassandraClient.prototype = {}
 CassandraClient.prototype.login = function(keyspace,auth_request){
@@ -5086,40 +5087,41 @@ if (null != result.success ) {
 }
 throw "describe_partitioner failed: unknown result"
 }
-CassandraClient.prototype.describe_keyspace = function(keyspace){
+CassandraClient.prototype.describe_keyspace = function(keyspace, callback){
+this.seqid += 1;
+this._reqs[this.seqid] = callback;
 this.send_describe_keyspace(keyspace)
-return this.recv_describe_keyspace()
 }
 
 CassandraClient.prototype.send_describe_keyspace = function(keyspace){
-this.output.writeMessageBegin('describe_keyspace', Thrift.MessageType.CALL, this.seqid)
+var oprot = new this.pClass(this.output);
+oprot.writeMessageBegin('describe_keyspace', Thrift.MessageType.CALL, this.seqid)
 var args = new Cassandra_describe_keyspace_args()
 args.keyspace = keyspace
-args.write(this.output)
-this.output.writeMessageEnd()
-return this.output.getTransport().flush()
+args.write(oprot)
+oprot.writeMessageEnd()
+return this.output.flush()
 }
 
-CassandraClient.prototype.recv_describe_keyspace = function(){
-var ret = this.input.readMessageBegin()
-var fname = ret.fname
-var mtype = ret.mtype
-var rseqid= ret.rseqid
+CassandraClient.prototype.recv_describe_keyspace = function(input, mtype, rseqid){
+console.log("reqs: ", require('sys').inspect(this._reqs), ", rseqid: ", rseqid);
+var callback = this._reqs[rseqid] || function() {};
+delete this._reqs[rseqid];
 if (mtype == Thrift.MessageType.EXCEPTION) {
   var x = new Thrift.ApplicationException()
-  x.read(this.input)
-  this.input.readMessageEnd()
+  x.read(input)
+  input.readMessageEnd()
   throw x
 }
 var result = new Cassandra_describe_keyspace_result()
-result.read(this.input)
-this.input.readMessageEnd()
+result.read(input)
+input.readMessageEnd()
 
 if (null != result.success ) {
-  return result.success
+  return callback(null, result.success);
 }
 if (null != result.nfe) {
-  throw result.nfe
+  return callback(result.nfe, null);
 }
 throw "describe_keyspace failed: unknown result"
 }
