@@ -481,8 +481,8 @@ return
 }
 
 ColumnParent = function(args){
-this.column_family = ''
-this.super_column = ''
+this.column_family = null;
+this.super_column = null;
 if( args != null ){if (null != args.column_family)
 this.column_family = args.column_family
 if (null != args.super_column)
@@ -709,8 +709,8 @@ return
 }
 
 SlicePredicate = function(args){
-this.column_names = []
-this.slice_range = new SliceRange()
+this.column_names = null;
+this.slice_range = null;
 this.ignore_empty_rows = false
 if( args != null ){if (null != args.column_names)
 this.column_names = args.column_names

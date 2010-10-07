@@ -325,8 +325,8 @@ return
 Cassandra_get_slice_args = function(args){
 this.keyspace = ''
 this.key = ''
-this.column_parent = new ColumnParent()
-this.predicate = new SlicePredicate()
+this.column_parent = null;
+this.predicate = null;
 this.consistency_level = 1
 if( args != null ){if (null != args.keyspace)
 this.keyspace = args.keyspace
@@ -4331,66 +4331,70 @@ result.read(this.input)
 this.input.readMessageEnd()
 
 if (null != result.success ) {
-  return result.success
+  return callback(null, result.success);
 }
 if (null != result.ire) {
-  throw result.ire
+  return callback(result.ire, null);
 }
 if (null != result.nfe) {
-  throw result.nfe
+  return callback(result.nfe, null);
 }
 if (null != result.ue) {
-  throw result.ue
+  return callback(result.ue, null);
 }
 if (null != result.te) {
-  throw result.te
+  return callback(result.te, null);
 }
 throw "get failed: unknown result"
 }
-CassandraClient.prototype.get_slice = function(keyspace,key,column_parent,predicate,consistency_level){
+CassandraClient.prototype.get_slice = function(keyspace,key,column_parent,predicate,consistency_level, callback){
+this.seqid += 1;
+this._reqs[this.seqid] = callback;
 this.send_get_slice(keyspace, key, column_parent, predicate, consistency_level)
-return this.recv_get_slice()
 }
 
 CassandraClient.prototype.send_get_slice = function(keyspace,key,column_parent,predicate,consistency_level){
-this.output.writeMessageBegin('get_slice', Thrift.MessageType.CALL, this.seqid)
+var output = new this.pClass(this.output);
+output.writeMessageBegin('get_slice', Thrift.MessageType.CALL, this.seqid)
 var args = new Cassandra_get_slice_args()
 args.keyspace = keyspace
 args.key = key
 args.column_parent = column_parent
 args.predicate = predicate
 args.consistency_level = consistency_level
-args.write(this.output)
-this.output.writeMessageEnd()
-return this.output.getTransport().flush()
+args.write(output)
+output.writeMessageEnd()
+return this.output.flush()
 }
 
-CassandraClient.prototype.recv_get_slice = function(){
-var ret = this.input.readMessageBegin()
-var fname = ret.fname
-var mtype = ret.mtype
-var rseqid= ret.rseqid
+CassandraClient.prototype.recv_get_slice = function(input, mtype, rseqid){
+var callback = this._reqs[rseqid] || function() {};
+delete this._reqs[rseqid];
 if (mtype == Thrift.MessageType.EXCEPTION) {
   var x = new Thrift.ApplicationException()
-  x.read(this.input)
-  this.input.readMessageEnd()
-  throw x
+  x.read(input)
+  input.readMessageEnd()
+  return callback(x, null);
 }
+console.log("getslice");
 var result = new Cassandra_get_slice_result()
-result.read(this.input)
-this.input.readMessageEnd()
+result.read(input)
+input.readMessageEnd()
 
 if (null != result.success ) {
-  return result.success
+  return callback(null, result.success);
 }
 if (null != result.ire) {
-  throw result.ire
+  return callback(result.ire, null);
+}
+if (null != result.nfe) {
+  return callback(result.nfe, null);
 }
 if (null != result.ue) {
-  throw result.ue
+  return callback(result.ue, null);
 }
 if (null != result.te) {
-  throw result.te
+  return callback(result.te, null);
 }
 throw "get_slice failed: unknown result"
 }
