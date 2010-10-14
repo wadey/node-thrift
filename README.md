@@ -15,18 +15,18 @@ by default in Cassandra 0.7 (but configuration must be changed in Cassandra
 
 Here is a Cassandra example:
 
-var thrift = require('thrift'),
-    Cassandra = require('./examples/Cassandra')
-    cassandra_types = require('./examples/cassandra_types');
+    var thrift = require('thrift'),
+        Cassandra = require('./examples/Cassandra')
+        cassandra_types = require('./examples/cassandra_types');
 
-var conn = new thrift.Connection(Cassandra.Client, "localhost", 9160);
-conn.open(function(client) {
-  client.get_slice("Keyspace", "key", new ColumnParent({column_family: "ExampleCF", super_column: null}), new SlicePredicate({slice_range: new SliceRange({start: '', end: ''})}), ConsistencyLevel.ONE, function(err, data) {
-    if (err) {
-      // handle err
-    } else {
-      // data == [ColumnOrSuperColumn, ...]
-    }
-    conn.end();
-  });
-});
+    var conn = new thrift.Connection(Cassandra.Client, "localhost", 9160);
+    conn.open(function(client) {
+      client.get_slice("Keyspace", "key", new ColumnParent({column_family: "ExampleCF", super_column: null}), new SlicePredicate({slice_range: new SliceRange({start: '', end: ''})}), ConsistencyLevel.ONE, function(err, data) {
+        if (err) {
+          // handle err
+        } else {
+          // data == [ColumnOrSuperColumn, ...]
+        }
+        conn.end();
+      });
+    });
