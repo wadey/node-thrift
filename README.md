@@ -32,15 +32,15 @@ Here is a Cassandra example:
 
     var thrift = require('thrift'),
         Cassandra = require('./examples/Cassandra')
-        cassandra_types = require('./examples/cassandra_types');
+        ttypes = require('./examples/cassandra_types');
 
     var conn = new thrift.Connection(Cassandra.Client, "localhost", 9160);
     conn.open(function(client) {
-      client.get_slice("Keyspace", "key", new ColumnParent({column_family: "ExampleCF", super_column: null}), new SlicePredicate({slice_range: new SliceRange({start: '', end: ''})}), ConsistencyLevel.ONE, function(err, data) {
+      client.get_slice("Keyspace", "key", new ttypes.ColumnParent({column_family: "ExampleCF", super_column: null}), new ttypes.SlicePredicate({slice_range: new ttypes.SliceRange({start: '', end: ''})}), ttypes.ConsistencyLevel.ONE, function(err, data) {
         if (err) {
           // handle err
         } else {
-          // data == [ColumnOrSuperColumn, ...]
+          // data == [ttypes.ColumnOrSuperColumn, ...]
         }
         conn.end();
       });

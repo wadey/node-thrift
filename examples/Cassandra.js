@@ -48,14 +48,14 @@ this.key = rtmp.value
 }
 break
 case 3:if (ftype == Thrift.Type.STRUCT) {
-this.column_parent = new ColumnParent()
+this.column_parent = new ttypes.ColumnParent()
 this.column_parent.read(input)
 } else {
   input.skip(ftype)
 }
 break
 case 4:if (ftype == Thrift.Type.STRUCT) {
-this.predicate = new SlicePredicate()
+this.predicate = new ttypes.SlicePredicate()
 this.predicate.read(input)
 } else {
   input.skip(ftype)
@@ -111,9 +111,9 @@ return
 
 Cassandra_get_slice_result = function(args){
 this.success = []
-this.ire = new InvalidRequestException()
-this.ue = new UnavailableException()
-this.te = new TimedOutException()
+this.ire = new ttypes.InvalidRequestException()
+this.ue = new ttypes.UnavailableException()
+this.te = new ttypes.TimedOutException()
 if( args != null ){if (null != args.success)
 this.success = args.success
 if (null != args.ire)
@@ -148,7 +148,7 @@ _size37 = rtmp3.size
 for (var _i41 = 0; _i41 < _size37; ++_i41)
 {
 var elem42 = null
-elem42 = new ColumnOrSuperColumn()
+elem42 = new ttypes.ColumnOrSuperColumn()
 elem42.read(input)
 this.success.push(elem42)
 }
@@ -159,21 +159,21 @@ input.readListEnd()
 }
 break
 case 1:if (ftype == Thrift.Type.STRUCT) {
-this.ire = new InvalidRequestException()
+this.ire = new ttypes.InvalidRequestException()
 this.ire.read(input)
 } else {
   input.skip(ftype)
 }
 break
 case 2:if (ftype == Thrift.Type.STRUCT) {
-this.ue = new UnavailableException()
+this.ue = new ttypes.UnavailableException()
 this.ue.read(input)
 } else {
   input.skip(ftype)
 }
 break
 case 3:if (ftype == Thrift.Type.STRUCT) {
-this.te = new TimedOutException()
+this.te = new ttypes.TimedOutException()
 this.te.read(input)
 } else {
   input.skip(ftype)
@@ -233,7 +233,7 @@ CassandraClient = exports.Client = function(output, pClass) {
 }
 CassandraClient.prototype = {}
 
-CassandraClient.prototype.get_slice = function(keyspace,key,column_parent,predicate,consistency_level, callback){
+CassandraClient.prototype.get_slice = function(keyspace,key,column_parent,predicate,consistency_level,callback){
 this.seqid += 1;
 this._reqs[this.seqid] = callback;
 this.send_get_slice(keyspace, key, column_parent, predicate, consistency_level)
@@ -242,7 +242,7 @@ this.send_get_slice(keyspace, key, column_parent, predicate, consistency_level)
 CassandraClient.prototype.send_get_slice = function(keyspace,key,column_parent,predicate,consistency_level){
 var output = new this.pClass(this.output);
 output.writeMessageBegin('get_slice', Thrift.MessageType.CALL, this.seqid)
-var args = new Cassandra_get_slice_args()
+var args = new ttypes.Cassandra_get_slice_args()
 args.keyspace = keyspace
 args.key = key
 args.column_parent = column_parent
