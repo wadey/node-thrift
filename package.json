@@ -1,7 +1,7 @@
 {
   "name": "thrift",
   "description": "node-thrift",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Wade Simmons <wade@wades.im>",
   "main": "./lib/index.js",
   "engines": { "node": ">= 0.2.1" },
