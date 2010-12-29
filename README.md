@@ -34,14 +34,18 @@ Here is a Cassandra example:
         Cassandra = require('./examples/Cassandra')
         ttypes = require('./examples/cassandra_types');
 
-    var conn = new thrift.Connection(Cassandra.Client, "localhost", 9160);
-    conn.open(function(client) {
-      client.get_slice("Keyspace", "key", new ttypes.ColumnParent({column_family: "ExampleCF", super_column: null}), new ttypes.SlicePredicate({slice_range: new ttypes.SliceRange({start: '', end: ''})}), ttypes.ConsistencyLevel.ONE, function(err, data) {
-        if (err) {
-          // handle err
-        } else {
-          // data == [ttypes.ColumnOrSuperColumn, ...]
-        }
-        conn.end();
-      });
+    var connection = thrift.createConnection("localhost", 9160),
+        client = thrift.createClient(Cassandra.Client, connection);
+
+    connection.on('error', function(err) {
+      console.error(err);
+    });
+
+    client.get_slice("Keyspace", "key", new ttypes.ColumnParent({column_family: "ExampleCF"}), new ttypes.SlicePredicate({slice_range: new ttypes.SliceRange({start: '', finish: ''})}), ttypes.ConsistencyLevel.ONE, function(err, data) {
+      if (err) {
+        // handle err
+      } else {
+        // data == [ttypes.ColumnOrSuperColumn, ...]
+      }
+      connection.end();
     });
