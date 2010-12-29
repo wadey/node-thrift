@@ -14,11 +14,11 @@ ttypes.ConsistencyLevel = {
 ,'ALL' : 5
 ,'ANY' : 6
 }
-ttypes.VERSION = '2.2.0'
+ttypes.VERSION = '2.1.0'
 var Column = module.exports.Column = function(args){
-this.name = ''
-this.value = ''
-this.timestamp = 0
+this.name = null
+this.value = null
+this.timestamp = null
 if( args != null ){if (null != args.name)
 this.name = args.name
 if (null != args.value)
@@ -92,8 +92,8 @@ return
 }
 
 var SuperColumn = module.exports.SuperColumn = function(args){
-this.name = ''
-this.columns = []
+this.name = null
+this.columns = null
 if( args != null ){if (null != args.name)
 this.name = args.name
 if (null != args.columns)
@@ -178,8 +178,8 @@ return
 }
 
 var ColumnOrSuperColumn = module.exports.ColumnOrSuperColumn = function(args){
-this.column = new ttypes.Column()
-this.super_column = new ttypes.SuperColumn()
+this.column = null
+this.super_column = null
 if( args != null ){if (null != args.column)
 this.column = args.column
 if (null != args.super_column)
@@ -272,7 +272,7 @@ return
 }
 
 var InvalidRequestException = module.exports.InvalidRequestException = function(args){
-this.why = ''
+this.why = null
 if( args != null ){if (null != args.why)
 this.why = args.why
 }}
@@ -386,7 +386,7 @@ return
 }
 
 var AuthenticationException = module.exports.AuthenticationException = function(args){
-this.why = ''
+this.why = null
 if( args != null ){if (null != args.why)
 this.why = args.why
 }}
@@ -434,7 +434,7 @@ return
 }
 
 var AuthorizationException = module.exports.AuthorizationException = function(args){
-this.why = ''
+this.why = null
 if( args != null ){if (null != args.why)
 this.why = args.why
 }}
@@ -482,8 +482,8 @@ return
 }
 
 var ColumnParent = module.exports.ColumnParent = function(args){
-this.column_family = ''
-this.super_column = ''
+this.column_family = null
+this.super_column = null
 if( args != null ){if (null != args.column_family)
 this.column_family = args.column_family
 if (null != args.super_column)
@@ -543,9 +543,9 @@ return
 }
 
 var ColumnPath = module.exports.ColumnPath = function(args){
-this.column_family = ''
-this.super_column = ''
-this.column = ''
+this.column_family = null
+this.super_column = null
+this.column = null
 if( args != null ){if (null != args.column_family)
 this.column_family = args.column_family
 if (null != args.super_column)
@@ -619,8 +619,8 @@ return
 }
 
 var SliceRange = module.exports.SliceRange = function(args){
-this.start = ''
-this.finish = ''
+this.start = null
+this.finish = null
 this.reversed = false
 this.count = 100
 if( args != null ){if (null != args.start)
@@ -710,15 +710,15 @@ return
 }
 
 var SlicePredicate = module.exports.SlicePredicate = function(args){
-this.column_names = []
-this.slice_range = new ttypes.SliceRange()
-this.ignore_empty_rows = false
+this.column_names = null
+this.slice_range = null
+this.ignore = false
 if( args != null ){if (null != args.column_names)
 this.column_names = args.column_names
 if (null != args.slice_range)
 this.slice_range = args.slice_range
-if (null != args.ignore_empty_rows)
-this.ignore_empty_rows = args.ignore_empty_rows
+if (null != args.ignore)
+this.ignore = args.ignore
 }}
 SlicePredicate.prototype = {}
 SlicePredicate.prototype.read = function(input){ 
@@ -764,7 +764,7 @@ this.slice_range.read(input)
 break
 case 3:if (ftype == Thrift.Type.BOOL) {
 var rtmp = input.readBool()
-this.ignore_empty_rows = rtmp.value
+this.ignore = rtmp.value
 } else {
   input.skip(ftype)
 }
@@ -800,9 +800,9 @@ output.writeFieldBegin('slice_range', Thrift.Type.STRUCT, 2)
 this.slice_range.write(output)
 output.writeFieldEnd()
 }
-if (null != this.ignore_empty_rows) {
-output.writeFieldBegin('ignore_empty_rows', Thrift.Type.BOOL, 3)
-output.writeBool(this.ignore_empty_rows)
+if (null != this.ignore) {
+output.writeFieldBegin('ignore', Thrift.Type.BOOL, 3)
+output.writeBool(this.ignore)
 output.writeFieldEnd()
 }
 output.writeFieldStop()
@@ -811,10 +811,10 @@ return
 }
 
 var KeyRange = module.exports.KeyRange = function(args){
-this.start_key = ''
-this.end_key = ''
-this.start_token = ''
-this.end_token = ''
+this.start_key = null
+this.end_key = null
+this.start_token = null
+this.end_token = null
 this.count = 100
 if( args != null ){if (null != args.start_key)
 this.start_key = args.start_key
@@ -917,8 +917,8 @@ return
 }
 
 var KeySlice = module.exports.KeySlice = function(args){
-this.key = ''
-this.columns = []
+this.key = null
+this.columns = null
 if( args != null ){if (null != args.key)
 this.key = args.key
 if (null != args.columns)
@@ -1003,9 +1003,9 @@ return
 }
 
 var Deletion = module.exports.Deletion = function(args){
-this.timestamp = 0
-this.super_column = ''
-this.predicate = new ttypes.SlicePredicate()
+this.timestamp = null
+this.super_column = null
+this.predicate = null
 if( args != null ){if (null != args.timestamp)
 this.timestamp = args.timestamp
 if (null != args.super_column)
@@ -1079,8 +1079,8 @@ return
 }
 
 var Mutation = module.exports.Mutation = function(args){
-this.column_or_supercolumn = new ttypes.ColumnOrSuperColumn()
-this.deletion = new ttypes.Deletion()
+this.column_or_supercolumn = null
+this.deletion = null
 if( args != null ){if (null != args.column_or_supercolumn)
 this.column_or_supercolumn = args.column_or_supercolumn
 if (null != args.deletion)
@@ -1140,9 +1140,9 @@ return
 }
 
 var TokenRange = module.exports.TokenRange = function(args){
-this.start_token = ''
-this.end_token = ''
-this.endpoints = []
+this.start_token = null
+this.end_token = null
+this.endpoints = null
 if( args != null ){if (null != args.start_token)
 this.start_token = args.start_token
 if (null != args.end_token)
@@ -1241,7 +1241,7 @@ return
 }
 
 var AuthenticationRequest = module.exports.AuthenticationRequest = function(args){
-this.credentials = {}
+this.credentials = null
 if( args != null ){if (null != args.credentials)
 this.credentials = args.credentials
 }}
@@ -1271,8 +1271,8 @@ _vtype30= rtmp3.vtype
 _size28= rtmp3.size
 for (var _i32 = 0; _i32 < _size28; ++_i32)
 {
-key33 = ''
-val34 = ''
+key33 = null
+val34 = null
 var rtmp = input.readString()
 key33 = rtmp.value
 var rtmp = input.readString()
