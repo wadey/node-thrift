@@ -47,4 +47,4 @@ Here is a Cassandra example:
 
 ## Custom client and server example
 
-An example based on the one shown on the Thrift front page is included in the [https://github.com/wadey/node-thrift/tree/master/examples](examples) folder.
+An example based on the one shown on the Thrift front page is included in the [examples](https://github.com/wadey/node-thrift/tree/master/examples) folder.
