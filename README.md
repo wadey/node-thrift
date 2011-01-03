@@ -14,7 +14,7 @@ by default in Cassandra 0.7 (but configuration must be changed in Cassandra
 
 A Thrift compiler is being built in a forked version of the upstream thrift
 library. You can check it out here:
-[http://github.com/wadey/thrift](http://github.com/wadey/thrift)
+[https://github.com/wadey/thrift](http://github.com/wadey/thrift)
 
 Once you build this patched version of Thrift, you can compile nodejs sources
 by running the following:
@@ -47,4 +47,4 @@ Here is a Cassandra example:
 
 ## Custom client and server example
 
-An example based on the one shown on the Thrift front page is included in the [http://github.com/wadey/node-thrift/tree/master/examples](examples) folder.
+An example based on the one shown on the Thrift front page is included in the [https://github.com/wadey/node-thrift/tree/master/examples](examples) folder.
