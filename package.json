@@ -3,6 +3,7 @@
   "description": "node-thrift",
   "version": "0.2.0",
   "author": "Wade Simmons <wade@wades.im>",
+  "directories" : { "lib" : "./lib" },
   "main": "./lib/index.js",
   "engines": { "node": ">= 0.2.1" },
 }
