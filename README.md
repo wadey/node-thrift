@@ -10,6 +10,10 @@ implementations, on the server side. Using a popular example, this is enabled
 by default in Cassandra 0.7 (but configuration must be changed in Cassandra
 0.6.x and earlier).
 
+## Install
+
+    npm install thrift 
+
 ## Thrift Compiler
 
 A Thrift compiler is being built in a forked version of the upstream thrift
