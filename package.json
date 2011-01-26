@@ -1,7 +1,7 @@
 {
   "name": "thrift",
   "description": "node-thrift",
-  "version": "0.6.0-dev",
+  "version": "0.6.0dev1",
   "author": "Wade Simmons <wade@wades.im>",
   "directories" : { "lib" : "./lib/thrift" },
   "main": "./lib/thrift",
