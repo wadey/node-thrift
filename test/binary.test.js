@@ -3,6 +3,50 @@ var assert = require('assert');
 var binary = require('thrift/binary');
 
 module.exports = {
+  "Should read I16": function() {
+    assert.equal(0, binary.readI16([0x00, 0x00]));
+    assert.equal(1, binary.readI16([0x00, 0x01]));
+    assert.equal(-1, binary.readI16([0xff, 0xff]));
+
+    // Min I16
+    assert.equal(-32768, binary.readI16([0x80, 0x00]));
+    // Max I16
+    assert.equal(32767, binary.readI16([0x7f, 0xff]));
+  },
+
+  "Should write I16": function() {
+    assert.deepEqual([0x00, 0x00], binary.writeI16([], 0));
+    assert.deepEqual([0x00, 0x01], binary.writeI16([], 1));
+    assert.deepEqual([0xff, 0xff], binary.writeI16([], -1));
+
+    // Min I16
+    assert.deepEqual([0x80, 0x00], binary.writeI16([], -32768));
+    // Max I16
+    assert.deepEqual([0x7f, 0xff], binary.writeI16([], 32767));
+  },
+
+  "Should read I32": function() {
+    assert.equal(0, binary.readI32([0x00, 0x00, 0x00, 0x00]));
+    assert.equal(1, binary.readI32([0x00, 0x00, 0x00, 0x01]));
+    assert.equal(-1, binary.readI32([0xff, 0xff, 0xff, 0xff]));
+
+    // Min I32
+    assert.equal(-2147483648, binary.readI32([0x80, 0x00, 0x00, 0x00]));
+    // Max I32
+    assert.equal(2147483647, binary.readI32([0x7f, 0xff, 0xff, 0xff]));
+  },
+
+  "Should write I32": function() {
+    assert.deepEqual([0x00, 0x00, 0x00, 0x00], binary.writeI32([], 0));
+    assert.deepEqual([0x00, 0x00, 0x00, 0x01], binary.writeI32([], 1));
+    assert.deepEqual([0xff, 0xff, 0xff, 0xff], binary.writeI32([], -1));
+
+    // Min I32
+    assert.deepEqual([0x80, 0x00, 0x00, 0x00], binary.writeI32([], -2147483648));
+    // Max I32
+    assert.deepEqual([0x7f, 0xff, 0xff, 0xff], binary.writeI32([], 2147483647));
+  },
+
   "Should read doubles": function() {
     assert.equal(0, binary.readDouble([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]))
     assert.equal(0, binary.readDouble([0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]))
