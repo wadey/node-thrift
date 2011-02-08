@@ -16,12 +16,8 @@ by default in Cassandra 0.7 (but configuration must be changed in Cassandra
 
 ## Thrift Compiler
 
-A Thrift compiler is being built in a forked version of the upstream thrift
-library. You can check it out here:
-[https://github.com/wadey/thrift](http://github.com/wadey/thrift)
-
-Once you build this patched version of Thrift, you can compile nodejs sources
-by running the following:
+A Thrift compiler is included in the 0.6.0 release of Thrift. You can
+compile nodejs sources by running the following:
 
     thrift --gen js:node thrift_file
 
