@@ -1,9 +1,9 @@
 {
   "name": "thrift",
   "description": "node-thrift",
-  "version": "0.6.0",
+  "version": "0.6.0-1",
   "author": "Wade Simmons <wade@wades.im>",
   "directories" : { "lib" : "./lib/thrift" },
   "main": "./lib/thrift",
-  "engines": { "node": ">= 0.2.4" },
+  "engines": { "node": ">= 0.2.4" }
 }
