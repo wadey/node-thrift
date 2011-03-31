@@ -39,4 +39,3 @@ f_client.store(user2, function(err, response) { //TODO: b_client
     console.log("retrieved:", responseUser.uid, " as ", responseUser.name);
   });
 });
-
