@@ -21,22 +21,22 @@ f_conn.on('error', function(err) {
 });
 
 f_client.store(user1, function(err, response) {
-    if (err) { console.error(err); return; }
+  if (err) { console.error(err); return; }
 
-    console.log("stored:", user1.uid, " as ", user1.name);
-    f_client.retrieve(user1.uid, function(err, responseUser) { //TODO: b_client
-        if (err) { console.error(err); return; }
-        console.log("retrieved:", responseUser.uid, " as ", responseUser.name);
-    });
+  console.log("stored:", user1.uid, " as ", user1.name);
+  f_client.retrieve(user1.uid, function(err, responseUser) { //TODO: b_client
+    if (err) { console.error(err); return; }
+    console.log("retrieved:", responseUser.uid, " as ", responseUser.name);
+  });
 });
 
 f_client.store(user2, function(err, response) { //TODO: b_client
-    if (err) { console.error(err); return; }
+  if (err) { console.error(err); return; }
 
-    console.log("stored:", user2.uid, " as ", user2.name);
-    f_client.retrieve(user2.uid, function(err, responseUser) {
-        if (err) { console.error(err); return; }
-        console.log("retrieved:", responseUser.uid, " as ", responseUser.name);
-    });
+  console.log("stored:", user2.uid, " as ", user2.name);
+  f_client.retrieve(user2.uid, function(err, responseUser) {
+    if (err) { console.error(err); return; }
+    console.log("retrieved:", responseUser.uid, " as ", responseUser.name);
+  });
 });
 
