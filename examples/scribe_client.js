@@ -29,6 +29,7 @@ var push_lines = function() {
     lines.push(logheader + (counter + i) + ' ' + str_times('x', Math.floor(Math.random() * 100)) + "\n");
   }
   var logs = lines.map(function(x){ return new ttypes.LogEntry({category: 'thrifttest', message: x}); });
+  console.log("transferring...", logs.length);
   var result = client.Log(logs, function(err, success){ if (! err){ counter += num; }});
 };
 
