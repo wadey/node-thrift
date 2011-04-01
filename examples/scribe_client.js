@@ -22,7 +22,7 @@ var str_times = function(str,times) {
 
 var push_lines = function() {
   var num = Math.floor(Math.random() * 100);
-  var now = '[' + (new Date()).toLocalString() + ']';
+  var now = '[' + (new Date()).toString() + ']';
   var logheader = '192.168.0.1 - - ' + now + ' ';
   var lines = [];
   for (var i = 0; i < num; i++) {
