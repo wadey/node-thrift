@@ -1,6 +1,7 @@
-var thrift = require('thrift');
+var thrift = require('thrift'),
+    ttransport = require('thrift/transport');
 
-var UserStorage = require('./gen-nodejs/UserStorage.js'),
+var UserStorage = require('./gen-nodejs/UserStorage'),
     ttypes = require('./gen-nodejs/user_types');
 
 var users = {};
@@ -20,10 +21,8 @@ var server_framed = thrift.createServer(UserStorage, {
   retrieve: retrieve
 });
 server_framed.listen(9090);
-/*
 var server_buffered = thrift.createServer(UserStorage, {
  store: store,
  retrieve: retrieve
-}, {transport: 'buffered'});
+}, {transport: ttransport.TBufferedTransport});
 server_buffered.listen(9091);
-*/

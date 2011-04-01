@@ -1,14 +1,13 @@
-var thrift = require('thrift');
+var thrift = require('thrift'),
+    ttransport = require('thrift/transport');
 
-var UserStorage = require('./gen-nodejs/UserStorage.js'),
+var UserStorage = require('./gen-nodejs/UserStorage'),
     ttypes = require('./gen-nodejs/user_types');
 
 var f_conn = thrift.createConnection('localhost', 9090), // default: framed
     f_client = thrift.createClient(UserStorage, f_conn);
-/*
-var b_conn = thrift.createConnection('localhost', 9091, {transport: 'buffered'}),
-    b_client = thrift.createClient(UserStorage, f_conn);
-*/
+var b_conn = thrift.createConnection('localhost', 9091, {transport: ttransport.TBufferedTransport}),
+    b_client = thrift.createClient(UserStorage, b_conn);
 var user1 = new ttypes.UserProfile({uid: 1,
                                     name: "Mark Slee",
                                     blurb: "I'll find something to put here."});
@@ -24,13 +23,13 @@ f_client.store(user1, function(err, response) {
   if (err) { console.error(err); return; }
 
   console.log("stored:", user1.uid, " as ", user1.name);
-  f_client.retrieve(user1.uid, function(err, responseUser) { //TODO: b_client
+  b_client.retrieve(user1.uid, function(err, responseUser) {
     if (err) { console.error(err); return; }
     console.log("retrieved:", responseUser.uid, " as ", responseUser.name);
   });
 });
 
-f_client.store(user2, function(err, response) { //TODO: b_client
+b_client.store(user2, function(err, response) {
   if (err) { console.error(err); return; }
 
   console.log("stored:", user2.uid, " as ", user2.name);
