@@ -28,8 +28,8 @@ var push_lines = function() {
   for (var i = 0; i < num; i++) {
     lines.push(logheader + str_times('x', Math.floor(Math.random() * 100)));
   }
-  var logs = lines.map(function(x){ return ttypes.LogEntry({category: 'thrifttest', message: x}); });
-  var result = client.Log({messages: logs}, function(err, success){ if (! err){ counter += num; }});
+  var logs = lines.map(function(x){ return new ttypes.LogEntry({category: 'thrifttest', message: x}); });
+  var result = client.Log(logs, function(err, success){ if (! err){ counter += num; }});
 };
 
 var loop_id = setInterval(push_lines, 1000);
