@@ -26,7 +26,7 @@ var push_lines = function() {
   var logheader = '192.168.0.1 - - ' + now + ' ';
   var lines = [];
   for (var i = 0; i < num; i++) {
-    lines.push(logheader + str_times('x', Math.floor(Math.random() * 100)));
+    lines.push(logheader + str_times('x', Math.floor(Math.random() * 100)) + "\n");
   }
   var logs = lines.map(function(x){ return new ttypes.LogEntry({category: 'thrifttest', message: x}); });
   var result = client.Log(logs, function(err, success){ if (! err){ counter += num; }});
