@@ -29,7 +29,7 @@ var push_lines = function() {
     lines.push(logheader + str_times('x', Math.floor(Math.random() * 100)));
   }
   var logs = lines.map(function(x){ return ttypes.LogEntry({category: 'thrifttest', message: x}); });
-  var result = client.Log(logs, function(err, success){ if (! err){ counter += num; }});
+  var result = client.Log({messages: logs}, function(err, success){ if (! err){ counter += num; }});
 };
 
 var loop_id = setInterval(push_lines, 1000);
@@ -37,4 +37,5 @@ var loop_id = setInterval(push_lines, 1000);
 setTimeout(function() {
   clearInterval(loop_id);
   connection.end();
+  console.log("transferred:", counter);
 }, 100 * 1000);
