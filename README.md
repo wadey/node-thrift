@@ -5,10 +5,11 @@ protocol has been implemented. A Thrift compiler that will generate the .js
 files from a Thrift specification is being implemented as well, see the
 Thrift Compiler section below.
 
-NOTE: you must use the framed thrift transport, TFramedTransport in most
-implementations, on the server side. Using a popular example, this is enabled
-by default in Cassandra 0.7 (but configuration must be changed in Cassandra
-0.6.x and earlier).
+NOTE: By default, node-thrift uses TFramedTransport. Using a popular
+example, this is enabled by default in Cassandra 0.7 (but configuration must be
+changed in Cassandra 0.6.x and earlier). See the
+[examples](https://github.com/wadey/node-thrift/tree/master/examples) folder
+to see how to enable TBufferedTransport (added in 0.7.0).
 
 ## Install
 
@@ -44,6 +45,10 @@ Here is a Cassandra example:
       }
       connection.end();
     });
+
+## Libraries using node-thrift
+
+* [yukim/node_cassandra](https://github.com/yukim/node_cassandra)
 
 ## Custom client and server example
 
