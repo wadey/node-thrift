@@ -5,5 +5,8 @@
   "author": "Wade Simmons <wade@wades.im>",
   "directories" : { "lib" : "./lib/thrift" },
   "main": "./lib/thrift",
-  "engines": { "node": ">= 0.2.4" }
+  "engines": { "node": ">= 0.2.4" },
+  "dependencies": {
+    "node-int64": "0.2.x"
+  }
 }

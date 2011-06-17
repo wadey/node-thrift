@@ -52,7 +52,7 @@ Here is a Cassandra example:
 <a name="int64"></a>
 ## Int64
 
-Since JavaScript represents all numbers as doubles, int64 values cannot be accurately represented naturally. To solve this, int64 values in responses will be wrapped with Thirft.Int64 objects. This Int64 implementation is based on [broofa/node-int64](https://github.com/broofa/node-int64)
+Since JavaScript represents all numbers as doubles, int64 values cannot be accurately represented naturally. To solve this, int64 values in responses will be wrapped with Thirft.Int64 objects. The Int64 implementation used is [broofa/node-int64](https://github.com/broofa/node-int64).
 
 ## Custom client and server example
 
