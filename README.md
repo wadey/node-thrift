@@ -46,6 +46,27 @@ Here is a Cassandra example:
       connection.end();
     });
 
+## Using Standard IO
+
+The StdIOClient and StdIOConnection was tested with: https://github.com/apache/thrift/blob/trunk/tutorial/php/PhpServer.php.
+However, the StdIOConnection should be able to interface with any process reading and writing to stdin and stdout using a thrift protocol.
+
+Here is a example:
+
+	var thrift = require('thrift'),
+			connection = thrift.createStdIOConnection('php PhpServer.php'),//the php server from above
+			client = thrift.createStdIOClient(someProcessor,connection);
+
+			client.someMethod(someParam,function(err,data){
+				if(!err){
+					console.log(data,"MADE IT HERE'S YOUR DATA");
+					return;
+				}
+
+				throw err;
+
+			});
+
 ## Libraries using node-thrift
 
 * [yukim/node_cassandra](https://github.com/yukim/node_cassandra)
