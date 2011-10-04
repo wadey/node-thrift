@@ -5,10 +5,11 @@ protocol has been implemented. A Thrift compiler that will generate the .js
 files from a Thrift specification is being implemented as well, see the
 Thrift Compiler section below.
 
-NOTE: you must use the framed thrift transport, TFramedTransport in most
-implementations, on the server side. Using a popular example, this is enabled
-by default in Cassandra 0.7 (but configuration must be changed in Cassandra
-0.6.x and earlier).
+NOTE: By default, node-thrift uses TFramedTransport. Using a popular
+example, this is enabled by default in Cassandra 0.7 (but configuration must be
+changed in Cassandra 0.6.x and earlier). See the
+[examples](https://github.com/wadey/node-thrift/tree/master/examples) folder
+to see how to enable TBufferedTransport (added in 0.7.0).
 
 ## Install
 
@@ -16,12 +17,8 @@ by default in Cassandra 0.7 (but configuration must be changed in Cassandra
 
 ## Thrift Compiler
 
-A Thrift compiler is being built in a forked version of the upstream thrift
-library. You can check it out here:
-[https://github.com/wadey/thrift](http://github.com/wadey/thrift)
-
-Once you build this patched version of Thrift, you can compile nodejs sources
-by running the following:
+A Thrift compiler is included in the 0.6.0 release of Thrift. You can
+compile nodejs sources by running the following:
 
     thrift --gen js:node thrift_file
 
@@ -53,6 +50,10 @@ Here is a Cassandra example:
 ## Int64
 
 Since JavaScript represents all numbers as doubles, int64 values cannot be accurately represented naturally. To solve this, int64 values in responses will be wrapped with Thirft.Int64 objects. The Int64 implementation used is [broofa/node-int64](https://github.com/broofa/node-int64).
+
+## Libraries using node-thrift
+
+* [yukim/node_cassandra](https://github.com/yukim/node_cassandra)
 
 ## Custom client and server example
 
