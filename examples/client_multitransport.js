@@ -1,5 +1,5 @@
 var thrift = require('thrift'),
-    ttransport = require('thrift/transport');
+    ttransport = thrift.transport;
 
 var UserStorage = require('./gen-nodejs/UserStorage'),
     ttypes = require('./gen-nodejs/user_types');
