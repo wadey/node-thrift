@@ -1,5 +1,10 @@
+/*
+ To run this example, do
+ # ln -s lib node_modules
+ */
+
 var thrift = require('thrift'),
-    ttransport = require('thrift/transport');
+    ttransport = thrift.Transport;
 
 var UserStorage = require('./gen-nodejs/UserStorage'),
     ttypes = require('./gen-nodejs/user_types');

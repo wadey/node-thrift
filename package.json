@@ -6,7 +6,7 @@
     { "type" : "svn",
       "url" : "http://svn.apache.org/repos/asf/thrift/trunk/"
     },
-  "version": "0.7.0-dev",
+  "version": "0.7.0-tagomoris",
   "author":
     { "name": "Apache Thrift Developers",
       "email": "dev@thrift.apache.org",
@@ -22,6 +22,6 @@
       "web": "https://issues.apache.org/jira/browse/THRIFT"
     },
   "directories" : { "lib" : "./lib/thrift" },
-  "main": "./lib/thrift",
+  "main": "./lib/thrift/index.js",
   "engines": { "node": ">= 0.2.4" }
 }
