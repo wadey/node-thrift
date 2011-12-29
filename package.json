@@ -19,7 +19,7 @@
     ],
   "bugs":
     { "mail": "dev@thrift.apache.org",
-      "url": "https://issues.apache.org/jira/browse/THRIFT"
+      "web": "https://issues.apache.org/jira/browse/THRIFT"
     },
   "directories" : { "lib" : "./lib/thrift" },
   "main": "./lib/thrift",
