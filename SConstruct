@@ -22,7 +22,8 @@ failfast = '' if os.getenv('NOFAILFAST') else ' --failfast'
 env["GENDIR"] = pjoin(cwd, 'test', 'generated')
 
 THRIFT_TARGETS = {
-  'ThriftTest.thrift': [ 'js:node' ]
+  'ThriftTest.thrift': [ 'js:node' ],
+  'mid.thrift': [ 'js:node' ]
 }
 
 tests = env.Glob("test/*.js")
