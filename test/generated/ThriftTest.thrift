@@ -27,13 +27,13 @@ namespace cpp thrift.test
 namespace rb Thrift.Test
 namespace perl ThriftTest
 namespace csharp Thrift.Test
-namespace js ThriftTest
+//namespace js ThriftTest
 namespace st ThriftTest
 namespace py ThriftTest
 namespace py.twisted ThriftTest
 namespace go ThriftTest
 namespace php ThriftTest
-namespace * thrift.test
+//namespace * thrift.test
 
 /**
  * Docstring!
