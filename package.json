@@ -6,7 +6,7 @@
     { "type" : "git",
       "url" : "https://github.com/simplereach/node-thrift"
     },
-  "version": "0.7.2",
+  "version": "0.7.3",
   "author":
     { "name": "Russell Bradberry",
       "email": "rbradberry@simplereach.com",
