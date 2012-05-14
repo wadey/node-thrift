@@ -1,16 +1,16 @@
 {
-  "name": "thrift",
-  "description": "node.js bindings for the Apache Thrift RPC system",
+  "name": "helenus-thrift",
+  "description": "helenus node-thrift fork",
   "homepage": "http://thrift.apache.org/",
   "repository":
-    { "type" : "svn",
-      "url" : "http://svn.apache.org/repos/asf/thrift/trunk/"
+    { "type" : "git",
+      "url" : "https://github.com/simplereach/node-thrift"
     },
-  "version": "0.7.0-dev",
+  "version": "0.7.3",
   "author":
-    { "name": "Apache Thrift Developers",
-      "email": "dev@thrift.apache.org",
-      "url": "http://thrift.apache.org"
+    { "name": "Russell Bradberry",
+      "email": "rbradberry@simplereach.com",
+      "url": "https://github.com/simplereach/"
     },
   "licenses":
     [ { "type": "Apache-2.0",
@@ -18,10 +18,10 @@
       }
     ],
   "bugs":
-    { "mail": "dev@thrift.apache.org",
-      "web": "https://issues.apache.org/jira/browse/THRIFT"
+    { "mail": "rbradberry@simplereach.com",
+      "web": "https://github.com/simplereach/node-thrift/issues"
     },
   "directories" : { "lib" : "./lib/thrift" },
   "main": "./lib/thrift",
-  "engines": { "node": ">= 0.2.4" }
+  "engines": { "node": ">= 0.6.0" }
 }
