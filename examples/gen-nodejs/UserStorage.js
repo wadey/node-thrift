@@ -261,7 +261,7 @@ UserStorageProcessor.prototype.process = function(input, output) {
     output.writeMessageBegin(r.fname, Thrift.MessageType.Exception, r.rseqid)
     x.write(output)
     output.writeMessageEnd()
-    output.flush()
+    output.flush(cb)
   }
 }
 
@@ -270,12 +270,13 @@ UserStorageProcessor.prototype.process_store = function(seqid, input, output) {
   args.read(input)
   input.readMessageEnd()
   var result = new UserStorage_store_result()
-  this._handler.store(args.user, function(success) {
-    result.success = success
+  this._handler.store(args.user, function(res_err,res_succ,cb) {
+	if(res_err) result.e = res_err
+	else result.success = res_succ
     output.writeMessageBegin("store", Thrift.MessageType.REPLY, seqid)
     result.write(output)
     output.writeMessageEnd()
-    output.flush()
+    output.flush(cb)
   })
 }
 
@@ -284,12 +285,13 @@ UserStorageProcessor.prototype.process_retrieve = function(seqid, input, output)
   args.read(input)
   input.readMessageEnd()
   var result = new UserStorage_retrieve_result()
-  this._handler.retrieve(args.uid, function(success) {
-    result.success = success
+  this._handler.retrieve(args.uid, function(res_err,res_succ,cb) {
+	if(res_err) result.e = res_err
+	else result.success = res_succ
     output.writeMessageBegin("retrieve", Thrift.MessageType.REPLY, seqid)
     result.write(output)
     output.writeMessageEnd()
-    output.flush()
+    output.flush(cb)
   })
 }
 

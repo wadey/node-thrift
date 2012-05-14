@@ -24,15 +24,32 @@ var UserStorage = require('./gen-nodejs/UserStorage.js'),
 var users = {};
 
 var server = thrift.createServer(UserStorage, {
-  store: function(user, success) {
-    console.log("server stored:", user.uid);
-    users[user.uid] = user;
-    success();
+  store: function(user, response) {
+	setTimeout(function(){//simulate latency
+		/* 
+		 * this is good for debugging. if a callback throws an error, it 
+		 * cant be caught if there's latency. that's also why we need to return the 
+		 * errors via parameters and not just throw them and expect they'll make 
+		 * their way back up the call stack)
+		 */
+		console.log("server stored:", user.uid);
+	    users[user.uid] = user;
+	    response(null,null,function(err){
+	      if(err) {
+			//you can test this by killing the client before the server responds
+            console.log("looks like we got a connection error");
+			return console.error(err);
+          }
+	      console.log('server.store() done!');
+	    });
+	},2000);
   },
 
-  retrieve: function(uid, success) {
+  retrieve: function(uid, response) {
     console.log("server retrieved:", uid);
-    success(users[uid]);
+	setTimeout(function(){
+		response(null,users[uid]);
+	},2000);
   },
 });
 
