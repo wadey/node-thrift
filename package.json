@@ -6,7 +6,7 @@
     { "type" : "svn",
       "url" : "http://svn.apache.org/repos/asf/thrift/trunk/"
     },
-  "version": "0.7.0-dev",
+  "version": "0.8.0",
   "author":
     { "name": "Apache Thrift Developers",
       "email": "dev@thrift.apache.org",
@@ -19,7 +19,7 @@
     ],
   "bugs":
     { "mail": "dev@thrift.apache.org",
-      "web": "https://issues.apache.org/jira/browse/THRIFT"
+      "url": "https://issues.apache.org/jira/browse/THRIFT"
     },
   "directories" : { "lib" : "./lib/thrift" },
   "main": "./lib/thrift",
